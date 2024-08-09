@@ -1,0 +1,52 @@
+#include <stdio.h>
+
+
+int main() {
+    
+    float prom = 0;
+    int i;
+    float notas[6];
+    for (i=1; i<=6;++i){
+        float nota;
+        printf("Digite nota %d: ",i);
+        scanf("%f", &nota);
+        notas[i-1] = nota;
+    }
+    prom = notas[0]*0.05+notas[1]*0.25+notas[2]*0.15+notas[3]*0.2+notas[4]*0.15+notas[5]*0.2;
+    printf("La nota final es: %f",prom);
+    
+    
+
+    return 0;
+}
+
+
+// Online C compiler to run C program online
+#include <stdio.h>
+
+int primeNum(int n){
+    int i=0;
+    for (i=2;i<n;++i){
+        if( n%i == 0){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+int main() {
+    int n;
+    printf("Enter a number: ");
+    scanf("%d", &n); 
+    int prime = primeNum(n);
+    if (prime==0){
+        printf("No es primo");
+    }
+    else{
+        printf("Es primo");
+    }
+
+    return 0;
+}
+
+
