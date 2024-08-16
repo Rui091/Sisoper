@@ -262,4 +262,59 @@ int main() {
 }
 }
 
+// Online C compiler to run C program online
+#include <stdio.h>
+
+int primeNum(int n){
+    int i=0;
+    if(n == 0){
+        return 0;
+    }
+    for (i=2;i*i<=n;++i){
+        if( n%i == 0){
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void printPrimeNums(int bot, int top){
+    for(bot;bot<=top;++bot){
+        if(primeNum(bot) == 1){
+            printf("%d\n",bot);
+        }
+    }
+}
+
+void primeList(int arr[], int size){
+    int i;
+    
+    for(i=0;i<size;++i){
+        if(primeNum(arr[i]) == 1){
+            printf("%d\n",i);
+        }    
+    }
+    
+}
+
+int main() {
+    int arr[] = {10, 23, 17, 33, 19, 2, 8, 5};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    
+    primeList(arr, size);
+    //printPrimeNums(3,5);
+    int n;
+    printf("Enter a number: ");
+    scanf("%d", &n); 
+    int prime = primeNum(n);
+    if (prime==0){
+        printf("No es primo");
+    }
+    else{
+        printf("Es primo");
+    }
+
+    return 0;
+}
+
 
