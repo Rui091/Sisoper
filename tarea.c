@@ -318,3 +318,103 @@ int main() {
 }
 
 
+// Online C++ compiler to run C++ program online
+#include <iostream>
+#include <string>
+#include <cmath>
+using namespace std;
+
+class Shape{
+    private:
+        string type;
+        string color;
+    public:
+        Shape(string color, string type) : color(color), type(type) {}
+
+        string getType() {
+            return type;
+        }
+
+        string getColor() {
+            return color;
+        }
+
+        void setType(string x) {
+            type = x;
+        }
+
+        void setColor(string x) {
+            color = x;
+        }
+
+        virtual double getArea() = 0;
+        virtual double getPerimeter() = 0; 
+};
+
+class Circle : public Shape{
+    private:
+        double radius;
+    public:
+        Circle(string type, string color, double radius) 
+            : Shape(color, type), radius(radius) {}
+        double getRadius(){
+            return radius;
+        }
+        void setRadius(double r){
+            radius = r;
+        }
+        double getArea() override {
+            return M_PI * radius * radius;
+        }
+        double getPerimeter() override {
+            return M_PI * radius * 2;
+        }
+        
+        
+    
+};
+
+class Rectangle: public shape{
+    private:
+        double lenght;
+        double width;
+    public:
+        Rectangle(string type, string color,double l, double w)
+            :Shape(color, type),length(l),width(w){}
+        double getLenght(){
+            return lenght;
+        }
+        double getWidth(){
+            return width;
+        }
+        void setLenght(double l){
+            lenght = l;
+        }
+        void setWidth(double w){
+            width = w;
+        }
+        double getArea() override {
+            return lenght*width;
+        }
+        double getPerimeter() override {
+            return lenght*2+width*2;
+        }
+        
+        
+}
+
+
+
+
+
+int main() {
+    Circle myCircle("Circle", "Red", 5.0);
+    
+    cout << "Shape Type: " << myCircle.getType() << endl;
+    cout << "Shape Color: " << myCircle.getColor() << endl;
+    cout << "Circle Radius: " << myCircle.getRadius() << endl;
+    cout << "Area of Circle: " << myCircle.getArea() << endl;
+    cout << "Perimeter of Circle: " << myCircle.getPerimeter() << endl;
+
+    return 0;
+}
