@@ -34,13 +34,14 @@ END - FINISH READING INSTRUCTION
 
 class Simulator {
 private:
-    int memory[1000] = {0};
+    int memory[50] = {0};
     int accumulator = 0;
     string controlUnit;
     string currentInstruction;
     string memoryAddressRegister ;
     string memoryDataRegister;
     int programCounter = 0;
+    int memSize = 50;
 
 public:
     int registerToint(string reg){
@@ -57,12 +58,17 @@ public:
         string command;
         ss >> command;
         if (command == "PAUSE") {
+            currentInstruction = controlUnit;
             cout << "ACC: " << accumulator << endl;
             cout << "ICR: " << currentInstruction << endl;
             cout << "MAR: " << memoryAddressRegister << endl;
             cout << "MDR: " << memoryDataRegister << endl;
-            cout << "UC: " << controlUnit<< endl;    
+            cout << "UC: " << controlUnit<< endl;  
+            for (int i = 0; i < 50; ++i) {
+                cout <<"D" << i <<": " << memory[i] << endl;
             }
+            
+        }
         else if (command == "SET") {
             string reg, value;
             ss >> reg >> value;
@@ -77,17 +83,18 @@ public:
             memoryAddressRegister = reg;
             int x = registerToint(reg);
             accumulator = memory[x];
-            memoryDataRegister = accumulator;
+            memoryDataRegister = to_string(accumulator);
 
         } else if (command == "ADD") {
             string reg1, reg2, reg3;
-            memoryDataRegister = currentInstruction;
             ss >> reg1 >> reg2 >> reg3;
             int reg1Int = registerToint(reg1);
             int reg2Int = registerToint(reg2);
             int reg3Int = registerToint(reg3);
             if (reg2 == "NULL" && reg3 == "NULL") {
                 accumulator += memory[reg1Int];
+                memoryDataRegister = to_string(memory[reg1Int]);
+                memoryAddressRegister = reg1;
             } else if (reg3 == "NULL") {
                 accumulator = memory[reg1Int] + memory[reg2Int];
                 memoryDataRegister = to_string(accumulator);
@@ -120,6 +127,7 @@ public:
             memory[x] = accumulator;
             memoryDataRegister = to_string(memory[x]);
             memoryAddressRegister = reg;
+            accumulator = 0;
         } else if (command == "SHW") {
             string reg;
             ss >> reg;
@@ -164,6 +172,6 @@ public:
 
 int main() {
     Simulator simulator;
-    simulator.loadProgram("programa1.txt");
+    simulator.loadProgram("caso1.txt");
     return 0;
 }
